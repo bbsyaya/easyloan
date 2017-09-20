@@ -1,0 +1,23 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>easyloan-platform-root</artifactId>
+        <groupId>com.vinnypay.easyloan</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.vinnypay.easyloan</groupId>
+    <artifactId>easyloan-domain-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>easyloan-domain-parent</name>
+    <description>easyloan-domain-parent</description>
+    <url>http://maven.apache.org</url>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>domain</module>
+        <module>domainservice</module>
+    </modules>
+
+</project>

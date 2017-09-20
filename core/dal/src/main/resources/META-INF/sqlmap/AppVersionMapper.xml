@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vinnypay.easyloan.mapper.AppVersionMapper">
+  <resultMap id="BaseResultMap" type="com.vinnypay.easyloan.dataobject.AppVersionDO">
+    <id column="APP_NAME" jdbcType="VARCHAR" property="appName" />
+    <result column="VERSION_NO" jdbcType="VARCHAR" property="versionNo" />
+    <result column="RELEASE_DATE" jdbcType="TIMESTAMP" property="releaseDate" />
+    <result column="PACKAGE_NAME" jdbcType="VARCHAR" property="packageName" />
+    <result column="VERSION" jdbcType="VARCHAR" property="version" />
+    <result column="FORCE_UPDATE" jdbcType="CHAR" property="forceUpdate" />
+    <result column="DOWNLOAD_URL" jdbcType="VARCHAR" property="downloadUrl" />
+    <result column="NOTICE" jdbcType="VARCHAR" property="notice" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    APP_NAME, VERSION_NO, RELEASE_DATE, PACKAGE_NAME, VERSION, FORCE_UPDATE, DOWNLOAD_URL, 
+    NOTICE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_APP_VERSION
+    where APP_NAME = #{appName,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from T_APP_VERSION
+    where APP_NAME = #{appName,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.vinnypay.easyloan.dataobject.AppVersionDO">
+    insert into T_APP_VERSION (APP_NAME, VERSION_NO, RELEASE_DATE, 
+      PACKAGE_NAME, VERSION, FORCE_UPDATE, 
+      DOWNLOAD_URL, NOTICE)
+    values (#{appName,jdbcType=VARCHAR}, #{versionNo,jdbcType=VARCHAR}, #{releaseDate,jdbcType=TIMESTAMP}, 
+      #{packageName,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, #{forceUpdate,jdbcType=CHAR}, 
+      #{downloadUrl,jdbcType=VARCHAR}, #{notice,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.vinnypay.easyloan.dataobject.AppVersionDO">
+    insert into T_APP_VERSION
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="appName != null">
+        APP_NAME,
+      </if>
+      <if test="versionNo != null">
+        VERSION_NO,
+      </if>
+      <if test="releaseDate != null">
+        RELEASE_DATE,
+      </if>
+      <if test="packageName != null">
+        PACKAGE_NAME,
+      </if>
+      <if test="version != null">
+        VERSION,
+      </if>
+      <if test="forceUpdate != null">
+        FORCE_UPDATE,
+      </if>
+      <if test="downloadUrl != null">
+        DOWNLOAD_URL,
+      </if>
+      <if test="notice != null">
+        NOTICE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="appName != null">
+        #{appName,jdbcType=VARCHAR},
+      </if>
+      <if test="versionNo != null">
+        #{versionNo,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseDate != null">
+        #{releaseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="packageName != null">
+        #{packageName,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="forceUpdate != null">
+        #{forceUpdate,jdbcType=CHAR},
+      </if>
+      <if test="downloadUrl != null">
+        #{downloadUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="notice != null">
+        #{notice,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vinnypay.easyloan.dataobject.AppVersionDO">
+    update T_APP_VERSION
+    <set>
+      <if test="versionNo != null">
+        VERSION_NO = #{versionNo,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseDate != null">
+        RELEASE_DATE = #{releaseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="packageName != null">
+        PACKAGE_NAME = #{packageName,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        VERSION = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="forceUpdate != null">
+        FORCE_UPDATE = #{forceUpdate,jdbcType=CHAR},
+      </if>
+      <if test="downloadUrl != null">
+        DOWNLOAD_URL = #{downloadUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="notice != null">
+        NOTICE = #{notice,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where APP_NAME = #{appName,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vinnypay.easyloan.dataobject.AppVersionDO">
+    update T_APP_VERSION
+    set VERSION_NO = #{versionNo,jdbcType=VARCHAR},
+      RELEASE_DATE = #{releaseDate,jdbcType=TIMESTAMP},
+      PACKAGE_NAME = #{packageName,jdbcType=VARCHAR},
+      VERSION = #{version,jdbcType=VARCHAR},
+      FORCE_UPDATE = #{forceUpdate,jdbcType=CHAR},
+      DOWNLOAD_URL = #{downloadUrl,jdbcType=VARCHAR},
+      NOTICE = #{notice,jdbcType=VARCHAR}
+    where APP_NAME = #{appName,jdbcType=VARCHAR}
+  </update>
+</mapper>

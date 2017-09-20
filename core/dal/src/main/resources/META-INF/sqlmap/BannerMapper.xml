@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vinnypay.easyloan.mapper.BannerMapper">
+  <resultMap id="BaseResultMap" type="com.vinnypay.easyloan.dataobject.BannerDO">
+    <id column="BANNER_ID" jdbcType="VARCHAR" property="bannerId" />
+    <result column="BANNER_NAME" jdbcType="VARCHAR" property="bannerName" />
+    <result column="BANNER_URL" jdbcType="VARCHAR" property="bannerUrl" />
+    <result column="LINK_URL" jdbcType="VARCHAR" property="linkUrl" />
+    <result column="BANNER_STATE" jdbcType="CHAR" property="bannerState" />
+    <result column="SHOW_LEVEL" jdbcType="INTEGER" property="showLevel" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    BANNER_ID, BANNER_NAME, BANNER_URL, LINK_URL, BANNER_STATE, SHOW_LEVEL
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_BANNER
+    where BANNER_ID = #{bannerId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectBannerList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from T_BANNER
+    where BANNER_STATE = #{bannerState, jdbcType=VARCHAR}
+    ORDER BY SHOW_LEVEL DESC,BANNER_ID ASC
+    limit #{queryPage.beginRow, jdbcType=INTEGER},#{queryPage.pageSize, jdbcType=INTEGER}
+  </select>
+
+  <select id="count" parameterType="java.lang.String" resultType="Integer">
+    select count(1) from T_BANNER where BANNER_STATE = #{bannerState, jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from T_BANNER
+    where BANNER_ID = #{bannerId,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.vinnypay.easyloan.dataobject.BannerDO">
+    insert into T_BANNER (BANNER_ID, BANNER_NAME, BANNER_URL, 
+      LINK_URL, BANNER_STATE, SHOW_LEVEL
+      )
+    values (#{bannerId,jdbcType=VARCHAR}, #{bannerName,jdbcType=VARCHAR}, #{bannerUrl,jdbcType=VARCHAR}, 
+      #{linkUrl,jdbcType=VARCHAR}, #{bannerState,jdbcType=CHAR}, #{showLevel,jdbcType=INTEGER}
+      )
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.vinnypay.easyloan.dataobject.BannerDO">
+    insert into T_BANNER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bannerId != null">
+        BANNER_ID,
+      </if>
+      <if test="bannerName != null">
+        BANNER_NAME,
+      </if>
+      <if test="bannerUrl != null">
+        BANNER_URL,
+      </if>
+      <if test="linkUrl != null">
+        LINK_URL,
+      </if>
+      <if test="bannerState != null">
+        BANNER_STATE,
+      </if>
+      <if test="showLevel != null">
+        SHOW_LEVEL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bannerId != null">
+        #{bannerId,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerName != null">
+        #{bannerName,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerUrl != null">
+        #{bannerUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="linkUrl != null">
+        #{linkUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerState != null">
+        #{bannerState,jdbcType=CHAR},
+      </if>
+      <if test="showLevel != null">
+        #{showLevel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.vinnypay.easyloan.dataobject.BannerDO">
+    update T_BANNER
+    <set>
+      <if test="bannerName != null">
+        BANNER_NAME = #{bannerName,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerUrl != null">
+        BANNER_URL = #{bannerUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="linkUrl != null">
+        LINK_URL = #{linkUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerState != null">
+        BANNER_STATE = #{bannerState,jdbcType=CHAR},
+      </if>
+      <if test="showLevel != null">
+        SHOW_LEVEL = #{showLevel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where BANNER_ID = #{bannerId,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.vinnypay.easyloan.dataobject.BannerDO">
+    update T_BANNER
+    set BANNER_NAME = #{bannerName,jdbcType=VARCHAR},
+      BANNER_URL = #{bannerUrl,jdbcType=VARCHAR},
+      LINK_URL = #{linkUrl,jdbcType=VARCHAR},
+      BANNER_STATE = #{bannerState,jdbcType=CHAR},
+      SHOW_LEVEL = #{showLevel,jdbcType=INTEGER}
+    where BANNER_ID = #{bannerId,jdbcType=VARCHAR}
+  </update>
+
+</mapper>
